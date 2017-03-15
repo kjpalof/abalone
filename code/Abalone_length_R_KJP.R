@@ -36,7 +36,8 @@ alkey <- prop.table(alkey.freq, margin=1)       # create age length key. probabi
 
 round(alkey, 3)       # rounded for display purposes only
 
-(shpab.mlr <- multinom(age~lcat10,data=shpab.aged,maxit=500))       # unclear
+(shpab.mlr <- multinom(age~lcat10,data=shpab.aged,maxit=500))       # fits a multinomial log-linear model via neural networks - is this the call that's needed here?
+#Ven-ables and Ripley 2002 
 
 lens <- seq(0,130,10)
 (alkey.sm <- predict(shpab.mlr,data.frame(lcat10=lens),type="probs"))       # calculate length category probabilities 
@@ -56,15 +57,15 @@ alkPlot(alkey,type="bubble",xlab="Total Length (mm)")       # plot bubble graph 
 
 round(prop.table(ad1),3)       # sum of abalone in each age class divided by total sum of abalone rounded for display purposes only
 
-# note: alk.freq and len.n were calculated previously
-alkAgeDist(alkey,lenA.n=rowSums(alkey.freq),len.n=len.n)
+# note: alk.freq and len.n were calculated previously 
+alkAgeDist(alkey,lenA.n=rowSums(alkey.freq),len.n=len.n) # alkey is prop at age/length, len.n is number in each length category
 
 tmp <- alkAgeDist(alkey,lenA.n=rowSums(alkey.freq),len.n=len.n)
 
 
 alkMeanVar(alkey,len~lcat10+age,data=shpab.aged,len.n=len.n)
 
-tmp <- alkMeanVar(alkey,len~lcat10+age,data=shpab.aged,len.n=len.n)        # comoputes men value(length)-at-age from age length key
+tmp2 <- alkMeanVar(alkey,len~lcat10+age,data=shpab.aged,len.n=len.n)        # comoputes men value(length)-at-age from age length key
 
 shpab.unaged.mod <- alkIndivAge(alkey, age~len,data=shpab.unaged)       # assign ages to unaged abalone using age length key
 head(shpab.unaged.mod)
