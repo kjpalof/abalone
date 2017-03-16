@@ -10,8 +10,8 @@ library(FSA)
 library(nnet)
 
 ###Age-length key from sheppard data###
-shpab <- read.csv("./data/length_weight_shepard.csv", header = TRUE)  
-shpab <- data.frame(len=shpab$len, age=shpab$age)
+shpab_raw <- read.csv("./data/length_weight_shepard.csv", header = TRUE)  
+shpab <- data.frame(len=shpab_raw$len, age=shpab_raw$age)
 headtail(shpab)
 
 shpab %<>% mutate(lcat10=lencat(len, w=10))       # determine length categories (in this case by 10s)
@@ -88,7 +88,7 @@ lines(mn~age,data=shpab.sumlen,lwd=2,lty=2)
 
 ###age length key for Gravina and Meares Pass timed swim data using sheppard###
 #Gravina_Abalone
-grvab <- read.csv("Gravina_Abalone.csv", header = TRUE)
+grvab <- read.csv("./data/Gravina_Abalone.csv", header = TRUE)
 grvab <- data.frame(len=grvab$len, age=grvab$age)
 grvab <- grvab[-c(192,301),]        #removed rows 192 and 301 b/c both were under 10mm. sheppard did not produce a '0mm' category
 headtail(grvab)
