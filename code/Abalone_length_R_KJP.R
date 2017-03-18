@@ -88,14 +88,15 @@ lines(mn~age,data=shpab.sumlen,lwd=2,lty=2)
 
 ###age length key for Gravina and Meares Pass timed swim data using sheppard###
 #Gravina_Abalone
-grvab <- read.csv("./data/Gravina_Abalone.csv", header = TRUE)
-grvab <- data.frame(len=grvab$len, age=grvab$age)
+grvab_raw <- read.csv("./data/Gravina_Abalone.csv", header = TRUE)
+grvab <- data.frame(len=grvab_raw$len, age=grvab_raw$age)
 grvab <- grvab[-c(192,301),]        #removed rows 192 and 301 b/c both were under 10mm. sheppard did not produce a '0mm' category
 headtail(grvab)
 
 grvab %<>% mutate(lcat10=lencat(len, w=10))       # determine length categories (in this case by 10s)
 headtail(grvab)
 
+# all these are unaged?? right?
 grvab.unaged <- filter(grvab, is.na(age))       # data.frame of unaged abalone
 headtail(grvab.unaged)
 
@@ -118,7 +119,7 @@ plot(len~age,data=grvab.unaged.mod,pch=19,col=rgb(0,0,0,1/10),
 lines(mn~age,data=grvab.sumlen,lwd=2,lty=2)
 
 #MearesPass_Abalone
-mrsab <- read.csv("MearesPass_Abalone.csv", header = TRUE)
+mrsab <- read.csv("./data/MearesPass_Abalone.csv", header = TRUE)
 mrsab <- data.frame(len=mrsab$len, age=mrsab$age)
 mrsab <- mrsab[-c(20,21,22,23,108,126),]        #removed rows b/c each was under 10mm or had no abalone. sheppard did not produce a '0mm' category
 headtail(mrsab)
@@ -179,9 +180,9 @@ mrsabcc
 
 plot(logn~age, data = mrsabcc, ylab = "log(Catch)", pch = 19)
 mrsabcc.d <- subset(mrsabcc, age >= 2)
-gravcc <- lm(logn~age, data = mrsabcc.d)
-coef(gravcc)
-confint(gravcc)
+mrscc <- lm(logn~age, data = mrsabcc.d)
+coef(mrscc)
+confint(mrscc)
 
 
 
@@ -191,6 +192,16 @@ grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10)
 summary(grvcc)
 confint(grvcc)
 plot(grvcc, main = "Gravina CC")
+
+grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 5:10)
+summary(grvcc1)
+confint(grvcc1)
+plot(grvcc1, main = "Gravina CC1")
+
+grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
+summary(grvcc2)
+confint(grvcc2)
+plot(grvcc2, main = "Gravina CC2")
 
 #est. meares pass data (2016 timed swims) 
 #w/2yearolds
