@@ -63,9 +63,9 @@ alkAgeDist(alkey,lenA.n=rowSums(alkey.freq),len.n=len.n) # alkey is prop at age/
 tmp <- alkAgeDist(alkey,lenA.n=rowSums(alkey.freq),len.n=len.n)
 
 
-alkMeanVar(alkey,len~lcat10+age,data=shpab.aged,len.n=len.n)
+alkMeanVar(alkey,len~lcat5+age,data=shpab.aged,len.n=len.n)
 
-tmp2 <- alkMeanVar(alkey,len~lcat10+age,data=shpab.aged,len.n=len.n)        # comoputes men value(length)-at-age from age length key
+tmp2 <- alkMeanVar(alkey,len~lcat5+age,data=shpab.aged,len.n=len.n)        # comoputes men value(length)-at-age from age length key
 
 shpab.unaged.mod <- alkIndivAge(alkey, age~len,data=shpab.unaged)       # assign ages to unaged abalone using age length key
 head(shpab.unaged.mod)
@@ -93,7 +93,7 @@ grvab <- data.frame(len=grvab_raw$len, age=grvab_raw$age)
 grvab <- grvab[-c(192,301),]        #removed rows 192 and 301 b/c both were under 10mm. sheppard did not produce a '0mm' category
 headtail(grvab)
 
-grvab %<>% mutate(lcat10=lencat(len, w=10))       # determine length categories (in this case by 10s)
+grvab %<>% mutate(lcat5=lencat(len, w=5))       # determine length categories (in this case by 5s)
 headtail(grvab)
 
 # all these are unaged?? right?
