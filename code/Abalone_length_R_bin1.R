@@ -188,6 +188,7 @@ confint(mrscc)
 
 ###Catch Curve shorthand###
 #est. gravina data (2016 timed swims)
+## simple regression
 grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10)
 summary(grvcc)
 confint(grvcc)
@@ -202,6 +203,18 @@ grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
 summary(grvcc2)
 confint(grvcc2)
 plot(grvcc2, main = "Gravina CC2")
+
+## weighted regression (see Maceina and Bettoli 1998 or Smith et al. 2012)
+grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+summary(grvcc)
+confint(grvcc)
+plot(grvcc, main = "Gravina CC")
+## Chapman Robson 
+grvcc <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:12)
+# for this estimator use all ages after peak catch was observed
+summary(grvcc)
+confint(grvcc)
+plot(grvcc, main = "Gravina CC")
 
 #est. meares pass data (2016 timed swims) 
 #w/2yearolds
