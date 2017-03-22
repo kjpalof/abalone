@@ -198,10 +198,16 @@ summary(grvcc1)
 confint(grvcc1)
 plot(grvcc1, main = "Gravina CC1")
 
-grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
+grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10)
 summary(grvcc2)
 confint(grvcc2)
 plot(grvcc2, main = "Gravina CC2")
+
+grvcc3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 1:12)
+summary(grvcc3)
+confint(grvcc3)
+plot(grvcc3, main = "Gravina CC3")
+
 
 #est. meares pass data (2016 timed swims) 
 #w/2yearolds
@@ -214,6 +220,11 @@ mrscc <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 3:9)
 summary(mrscc)
 confint(mrscc)
 plot(mrscc, main = "Meares Pass CC w/o 2 year olds")
+
+mrscc <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 1:5)
+summary(mrscc)
+confint(mrscc)
+plot(mrscc, main = "Meares Pass CC ages 1 to 5") #use this one.
 
 #est. Meares Pass and Gravina data combined (2016 timed swims)
 combcc <- catchCurve(n~age, data = combab.sumlen, ages2use = 3:10)
