@@ -10,6 +10,7 @@
 #Sheppard legnth distribution
 head(shpab)
 shpab %>% mutate(area = rep("shp", nrow(shpab))) -> shpab
+#save this data for R markdown
 
 #histogram of legnths (len)
 ggplot(shpab, aes(x=len)) + 
@@ -72,6 +73,7 @@ ggplot(allab, aes(x=len, colour = area)) +
 
 ggplot(allab2, aes(x=len, fill = area)) + 
   geom_histogram(binwidth = 1.0, alpha = 0.5, position = "identity") 
+
 ggplot(allab2, aes(x=len, colour = area)) + 
   geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
                  binwidth=1, 
