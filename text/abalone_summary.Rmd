@@ -12,12 +12,26 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Abalone 
 
 ## Age - length relationship/ key
-The Sheppard data is used to develop an age-length key that was then used to determine ages from the lengths collected from Gravina and Meares Pass.  Size frequency distribution comparisons were performed to determine if this was valid.  Visual inspection of these distributions suggests differences. 
+The Sheppard data is used to develop an age-length key that was then used to determine ages from the lengths collected from Gravina and Meares Pass.  
+
+** age length key figure **
+
+Size frequency distribution comparisons were performed to determine if this was valid.  Visual inspection of these distributions suggests differences. 
 **insert figure here **
 A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions.  Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
 
 ## catch curve
+### Background
 The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When using the regression method either the peak age to the age with <5 or the age after the peak age to age with <5.  Other methods have slight alterations to the ages used.  
+
+### Sheppard data
+The traditional catch curve methods, using the Sheppard data, yielded a Z estimate of 0.49.  This appears high for the life history of abalone.  
+Questions: 
+Does a peak age of 5 make sense - that this would be the age they would full recruit to the adult population and to the fishery/ sampling methods?  If not what age would be more appropriate.  
+
+Would you expect ages 4 and 5 to be that much greater or was there a recruitment pulse? A higher than normal recruitment pulse for ages 4 and 5 would inflat the estimate of Z, by creating an artifically high starting point for the linear catch curve analysis. 
+
+### Gravina data 
 
 
 
