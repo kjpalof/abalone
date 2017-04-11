@@ -12,13 +12,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Abalone 
 
 ## Age - length relationship/ key
-The Sheppard data is used to develop an age-length key that was then used to determine ages from the lengths collected from Gravina and Meares Pass.  
+The Sheppard data is used to develop an age-length key that was then used to determine ages from the lengths collected from Gravina and Meares Pass. The Sheppard ablaone age-length data was collected in 1998, and the current length distributions are from 2016.  
 
-** age length key figure **
+![](../figs/shep_agelengthkey.png)
 
-Size frequency distribution comparisons were performed to determine if this was valid.  Visual inspection of these distributions suggests differences. 
-**insert figure here **
-A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions.  Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
+Due to the differences in both location and time, size frequency distribution comparisons were performed to determine if this was valid.  Visual inspection of these distributions suggests differences. These differences could be due to growth differences between locations, sampling methods changes, or recruitment pulses, to name a few. 
+
+![](../figs/density_abs.png)
+
+
+A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions (p-value <0.0001).  Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
 
 ## catch curve
 ### Background
