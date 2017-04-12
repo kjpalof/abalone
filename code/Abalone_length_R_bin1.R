@@ -194,6 +194,8 @@ summary(grvcc)
 confint(grvcc)
 plot(grvcc, main = "Gravina CC")
 
+R1 <- cbind(Est = coef(grvcc), confint(grvcc))
+
 grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 5:10)
 summary(grvcc1)
 confint(grvcc1)
@@ -205,12 +207,12 @@ confint(grvcc2)
 plot(grvcc2, main = "Gravina CC2")
 
 ## weighted regression (see Maceina and Bettoli 1998 or Smith et al. 2012)
-grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
-summary(grvcc)
-confint(grvcc)
-plot(grvcc, main = "Gravina CC")
+grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+summary(grvccW)
+confint(grvccW)
+plot(grvccW, main = "Gravina CC weighted")
 ## Chapman Robson 
-grvcc <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:12)
+grvcc <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:12)
 # for this estimator use all ages after peak catch was observed
 summary(grvcc)
 confint(grvcc)
