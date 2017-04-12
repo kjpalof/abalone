@@ -25,7 +25,9 @@ A KS test was performed between Sheppard and Gravina which suggests that they ar
 
 ## catch curve
 ### Background
-The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When using the regression method either the peak age to the age with <5 or the age after the peak age to age with <5.  Other methods have slight alterations to the ages used.  
+The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When using the regression method either the peak age to the age with <2 or the age after the peak age to age with <2.  Other methods have slight alterations to the ages used.  
+Explain runs/method variations here and label them.
+
 
 ### Sheppard data
 The traditional catch curve methods, using the Sheppard data, yielded a Z estimate of 0.49.  This appears high for the life history of abalone.  
@@ -33,6 +35,8 @@ Questions:
 Does a peak age of 5 make sense - that this would be the age they would full recruit to the adult population and to the fishery/ sampling methods?  If not what age would be more appropriate.  
 
 Would you expect ages 4 and 5 to be that much greater or was there a recruitment pulse? A higher than normal recruitment pulse for ages 4 and 5 would inflat the estimate of Z, by creating an artifically high starting point for the linear catch curve analysis. 
+
+Report results of multiple methods/ ages used.  Use actual data for this.
 
 ### Gravina data 
 
