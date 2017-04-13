@@ -184,7 +184,11 @@ mrscc <- lm(logn~age, data = mrsabcc.d)
 coef(mrscc)
 confint(mrscc)
 
-
+### Catch curve Sheppard ----------------
+shpcc <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13)
+summary(shpcc)
+confint(shpcc)
+plot(shpcc, main = "Sheppard CC")
 
 ###Catch Curve shorthand###
 #est. gravina data (2016 timed swims)
