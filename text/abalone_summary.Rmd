@@ -25,12 +25,19 @@ A KS test was performed between Sheppard and Gravina which suggests that they ar
 
 ## catch curve
 ### Background
-The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When using the regression method either the peak age to the age with <2 or the age after the peak age to age with <2.  Other methods have slight alterations to the ages used.  
+Catch curve assumptions (Smith et al. 2012): 
+1) age composition data is estimated without error
+2) recruitment is constant
+3) Z is constant over time and across ages
+4) above some determined age 
 
-Estimation methods:
-Chapman and Robson
-Regression
-Weighted Regression
+
+Common and accepted methods to estimate Z:
+1) Chapman and Robson
+2) Regression
+3) Weighted Regression
+
+The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  
 
 When estimating Z using catch curve methods, the age of full recruitment can be subjective.  Most often the peak age of abundance or the peak age of abundance plus 1 is used.  However, violations in the assumption of constant recruitment can alter the peak age to not coincide with the age of full recruitment.  
 
