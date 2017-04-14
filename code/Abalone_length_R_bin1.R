@@ -185,10 +185,19 @@ coef(mrscc)
 confint(mrscc)
 
 ### Catch curve Sheppard ----------------
+#peak to all ages
 shpcc <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13)
 summary(shpcc)
 confint(shpcc)
 plot(shpcc, main = "Sheppard CC")
+# peak plus to all - none under 2.
+shpcc1 <- catchCurve(n~age, data = shpab.sumlen, ages2use = 6:13)
+summary(shpcc1)
+confint(shpcc1)
+plot(shpcc1, main = "Sheppard CC")
+
+
+
 
 ###Catch Curve shorthand###
 #est. gravina data (2016 timed swims)
