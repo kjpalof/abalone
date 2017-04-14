@@ -37,14 +37,16 @@ Common and accepted methods to estimate Z:
 2) Regression
 3) Weighted Regression
 
-The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  
-
-When estimating Z using catch curve methods, the age of full recruitment can be subjective.  Most often the peak age of abundance or the peak age of abundance plus 1 is used.  However, violations in the assumption of constant recruitment can alter the peak age to not coincide with the age of full recruitment.  
+The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When estimating Z using catch curve methods, the age of full recruitment can be subjective.  Most often the peak age of abundance or the peak age of abundance plus 1 is used.  However, violations in the assumption of constant recruitment can alter the peak age to not coincide with the age of full recruitment.  Both peak age and peak age plus 1 were used here. 
 
 Additionally, right truncation of the data set (excluding rare older ages) is commonly applied to reduce bias in estimates of Z.  Four common methods are: RG - use all age groups with nonzero catch, R1 - use all groups up to but not including the first age where catch is 0 or 1, R1' - uses all ages with nonzero catches up to and including the age after which all catches are less than 2, R1'' - uses all ages that have catches greater than 1 (Smith et al. 2012). 
 
 ### Sheppard data
-The traditional catch curve methods, using the Sheppard data, yielded a Z estimate of 0.49.  This appears high for the life history of abalone.  
+The traditional catch curve methods, using the Sheppard data, yielded a Z estimate ranging from 0.51 to 0.49.  This appears high for the life history of abalone. 
+
+Catch curve results:
+3 methods and at least a couple runs per method.
+
 Questions: 
 Does a peak age of 5 make sense - that this would be the age they would full recruit to the adult population and to the fishery/ sampling methods?  If not what age would be more appropriate.  
 
