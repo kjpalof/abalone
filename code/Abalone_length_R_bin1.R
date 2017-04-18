@@ -185,7 +185,8 @@ coef(mrscc)
 confint(mrscc)
 
 ### Catch curve Sheppard ----------------
-#peak to all ages
+write.csv(shpab.sumlen, file = "./output/shp_catchcurve.csv")
+#peak to all ages - Regression
 shpcc <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13)
 summary(shpcc)
 confint(shpcc)
@@ -196,7 +197,26 @@ summary(shpcc1)
 confint(shpcc1)
 plot(shpcc1, main = "Sheppard CC")
 
+Shp <- cbind(Est = coef(shpcc), confint(shpcc))
+Shp1 <- cbind(Est = coef(shpcc1), confint(shpcc1))
 
+shp_reg <- cbind (peak = Shp[1, ], peak_plus = Shp1[1, ])
+
+#peak to all ages - CR method
+shpCR <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 5:13)
+summary(shpCR)
+confint(shpCR)
+plot(shpCR, main = "Sheppard CC CR method")
+# peak plus to all - none under 2.
+shpCR1 <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 6:13)
+summary(shpCR1)
+confint(shpCR1)
+plot(shpCR1, main = "Sheppard CC CR method")
+
+Shp_cr <- cbind(Est = coef(shpCR), confint(shpCR))
+Shp_cr1 <- cbind(Est = coef(shpCR1), confint(shpCR1))
+
+shp_CR <- cbind (peak = Shp_cr[1, ], peak_plus = Shp_cr1[1, ])
 
 
 ###Catch Curve shorthand###
