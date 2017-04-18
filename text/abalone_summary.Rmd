@@ -7,12 +7,18 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+library(FSA)
+library(nnet)
+library(knitr)
+
 ```
 
 ## Abalone 
 
 ## Age - length relationship/ key
-The Sheppard data is used to develop an age-length key that was then used to determine ages from the lengths collected from Gravina and Meares Pass. The Sheppard ablaone age-length data was collected in 1998, and the current length distributions are from 2016.  
+The Sheppard data was used to develop an age-length key that could be used used to determine ages from the lengths collected from Gravina and Meares Pass. The Sheppard ablaone age-length data was collected in 1998, and the current length distributions are from 2016.  
 
 ![](../figs/shep_agelengthkey.png)
 
@@ -26,18 +32,25 @@ A KS test was performed between Sheppard and Gravina which suggests that they ar
 ## catch curve
 ### Background
 Catch curve assumptions (Smith et al. 2012): 
+
 1) age composition data is estimated without error
+
 2) recruitment is constant
+
 3) Z is constant over time and across ages
+
 4) above some determined age 
 
 
 Common and accepted methods to estimate Z:
-1) Chapman and Robson
-2) Regression
-3) Weighted Regression
 
-The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012).  When estimating Z using catch curve methods, the age of full recruitment can be subjective.  Most often the peak age of abundance or the peak age of abundance plus 1 is used.  However, violations in the assumption of constant recruitment can alter the peak age to not coincide with the age of full recruitment.  Both peak age and peak age plus 1 were used here. 
+1) Regression estimate
+
+2) Chapman and Robson estimator
+
+3) Weighted Regression estiamte
+
+The choice of ages to include in the catch curve analysis has been throughly examined by many studies (Dunn et al. 2002, Smith et al. 2012), although there is no clear consensus on which to use.  When estimating Z using catch curve methods, the age of full recruitment can be subjective.  Most often the peak age of abundance or the peak age of abundance plus 1 is used.  However, violations in the assumption of constant recruitment can alter the peak age to not coincide with the age of full recruitment.  Both peak age and peak age plus 1 were used here. 
 
 Additionally, right truncation of the data set (excluding rare older ages) is commonly applied to reduce bias in estimates of Z.  Four common methods are: RG - use all age groups with nonzero catch, R1 - use all groups up to but not including the first age where catch is 0 or 1, R1' - uses all ages with nonzero catches up to and including the age after which all catches are less than 2, R1'' - uses all ages that have catches greater than 1 (Smith et al. 2012). 
 
@@ -45,14 +58,34 @@ Additionally, right truncation of the data set (excluding rare older ages) is co
 The traditional catch curve methods, using the Sheppard data, yielded a Z estimate ranging from 0.51 to 0.49.  This appears high for the life history of abalone. 
 
 Catch curve results:
-3 methods and at least a couple runs per method.
+
+```{r shp regression, include=TRUE, echo = FALSE}
+shpab.sumlen <- read.csv("../output/shp_catchcurve.csv")
+shpcc <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13)
+shpcc1 <- catchCurve(n~age, data = shpab.sumlen, ages2use = 6:13)
+Shp <- cbind(Est = coef(shpcc), confint(shpcc))
+Shp1 <- cbind(Est = coef(shpcc1), confint(shpcc1))
+
+shp_reg <- cbind (peak = Shp[1, ], peak_plus = Shp1[1, ])
+kable(shp_reg, caption = "Regression method, peak age = 5")
+```
+
+```{r shp chapman, include=TRUE, echo = FALSE}
+shpCR <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 5:13)
+shpCR1 <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 6:13)
+Shp_cr <- cbind(Est = coef(shpCR), confint(shpCR))
+Shp_cr1 <- cbind(Est = coef(shpCR1), confint(shpCR1))
+
+shp_CR <- cbind (peak = Shp_cr[1, ], peak_plus = Shp_cr1[1, ])
+kable(shp_CR, caption = "Chapman Robson method, peak age = 5")
+```
+
 
 Questions: 
 Does a peak age of 5 make sense - that this would be the age they would full recruit to the adult population and to the fishery/ sampling methods?  If not what age would be more appropriate.  
 
-Would you expect ages 4 and 5 to be that much greater or was there a recruitment pulse? A higher than normal recruitment pulse for ages 4 and 5 would inflat the estimate of Z, by creating an artifically high starting point for the linear catch curve analysis. 
+Would you expect ages 4 and 5 to be that much greater than 6 to 13? or was there a recruitment pulse? A higher than normal recruitment pulse for ages 4 and 5 would inflat the estimate of Z, by creating an artifically high starting point for the linear catch curve analysis. 
 
-Report results of multiple methods/ ages used.  Use actual data for this.
 
 ### Gravina data 
 
