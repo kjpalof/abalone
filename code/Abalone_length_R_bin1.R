@@ -202,7 +202,7 @@ Shp1 <- cbind(Est = coef(shpcc1), confint(shpcc1))
 
 shp_reg <- cbind (peak = Shp[1, ], peak_plus = Shp1[1, ])
 
-#peak to all ages - CR method
+#peak to all ages - CR method -----------
 shpCR <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 5:13)
 summary(shpCR)
 confint(shpCR)
@@ -219,15 +219,51 @@ Shp_cr1 <- cbind(Est = coef(shpCR1), confint(shpCR1))
 shp_CR <- cbind (peak = Shp_cr[1, ], peak_plus = Shp_cr1[1, ])
 
 
+#peak to all ages - Weighted Regression method -----------
+shpccW <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13, use.weights = TRUE)
+summary(shpccW)
+confint(shpccW)
+plot(shpccW, main = "Sheppard CC weighted")
+# peak plus to all - none under 2.
+shpccW1 <- catchCurve(n~age, data = shpab.sumlen, ages2use = 6:13, use.weights = TRUE)
+summary(shpccW1)
+confint(shpccW1)
+plot(shpccW1, main = "Sheppard CC weighted")
+
+Shp_W <- cbind(Est = coef(shpccW), confint(shpccW))
+Shp_W1 <- cbind(Est = coef(shpccW1), confint(shpccW1))
+
+shp_WR <- cbind (peak = Shp_W[1, ], peak_plus = Shp_W1[1, ])
+
+
 ###Catch Curve shorthand###
 #est. gravina data (2016 timed swims)
+write.csv(grvab.sumlen, file = "./output/grv_catchcurve.csv")
 ## simple regression
-grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10)
+## peak to all ages
+grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
 summary(grvcc)
 confint(grvcc)
 plot(grvcc, main = "Gravina CC")
+## peak to last age before 0.
+grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10)
+summary(grvcc1)
+confint(grvcc1)
+plot(grvcc1, main = "Gravina CC1")
+#peak plus all 
+grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12)
+summary(grvcc2)
+confint(grvcc2)
+plot(grvcc2, main = "Gravina CC2")
+#peak plus til last 0 age
+grvcc3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10)
+summary(grvcc3)
+confint(grvcc3)
+plot(grvcc3, main = "Gravina CC3")
 
-R1 <- cbind(Est = coef(grvcc), confint(grvcc))
+grvr <- cbind(Est = coef(grvcc), confint(grvcc))
+grvr1 <- cbind(Est = coef(shpccW1), confint(shpccW1))
+grvr2
 
 grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 5:10)
 summary(grvcc1)
