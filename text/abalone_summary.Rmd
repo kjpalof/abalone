@@ -102,18 +102,50 @@ The traditional catch curve methods were performed using the Gravina data that h
 Catch curve results:
 
 ```{r grv regression, include=TRUE, echo = FALSE}
-shpab.sumlen <- read.csv("../output/shp_catchcurve.csv")
-shpcc <- catchCurve(n~age, data = shpab.sumlen, ages2use = 5:13)
-shpcc1 <- catchCurve(n~age, data = shpab.sumlen, ages2use = 6:13)
-Shp <- cbind(Est = coef(shpcc), confint(shpcc))
-Shp1 <- cbind(Est = coef(shpcc1), confint(shpcc1))
+grvab.sumlen <- read.csv("../output/grv_catchcurve.csv")
+grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
+grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10)
+grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12)
+grvcc3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10)
 
-shp_reg <- cbind (peak = Shp[1, ], peak_plus = Shp1[1, ])
-kable(shp_reg, caption = "Regression method, peak age = 5")
+grvr <- cbind(Est = coef(grvcc), confint(grvcc))
+grvr1 <- cbind(Est = coef(grvcc1), confint(grvcc1))
+grvr2 <- cbind(Est = coef(grvcc2), confint(grvcc2))
+grvr3 <- cbind(Est = coef(grvcc3), confint(grvcc3))
+grv_R <- cbind (peak_all = grvr[1, ], peak_plus_all = grvr1[1, ], peak_10 = grvr2[1, ], peak_plus_10 = grvr3[1, ])
+
+kable(grv_R, caption = "Regression method, peak age = 2")
 ```
 
+```{r grv Wtd regression, include=TRUE, echo = FALSE}
+grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12, use.weights = TRUE)
+grvccW1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10, use.weights = TRUE)
+grvccW2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12, use.weights = TRUE)
+grvccW3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
 
+grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
+grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
+grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
+grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
+grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
 
+kable(grv_WR, caption = "Weighted regression method, peak age = 2")
+```
+
+```{r grv chapman robson method, include=TRUE, echo = FALSE}
+grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12, use.weights = TRUE)
+grvccW1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10, use.weights = TRUE)
+grvccW2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12, use.weights = TRUE)
+grvccW3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+
+grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
+grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
+grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
+grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
+grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
+
+kable(grv_WR, caption = "Weighted regression method, peak age = 2")
+```
 
 
 ## simulations to estimate Z
