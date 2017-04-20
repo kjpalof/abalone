@@ -262,30 +262,72 @@ confint(grvcc3)
 plot(grvcc3, main = "Gravina CC3")
 
 grvr <- cbind(Est = coef(grvcc), confint(grvcc))
-grvr1 <- cbind(Est = coef(shpccW1), confint(shpccW1))
-grvr2
+grvr1 <- cbind(Est = coef(grvcc1), confint(grvcc1))
+grvr2 <- cbind(Est = coef(grvcc2), confint(grvcc2))
+grvr3 <- cbind(Est = coef(grvcc3), confint(grvcc3))
 
-grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 5:10)
-summary(grvcc1)
-confint(grvcc1)
-plot(grvcc1, main = "Gravina CC1")
-
-grvcc2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
-summary(grvcc2)
-confint(grvcc2)
-plot(grvcc2, main = "Gravina CC2")
+grv_R <- cbind (peak_all = grvr[1, ], peak_plus_all = grvr1[1, ], peak_10 = grvr2[1, ], peak_plus_10 = grvr3[1, ])
 
 ## weighted regression (see Maceina and Bettoli 1998 or Smith et al. 2012)
-grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12, use.weights = TRUE)
 summary(grvccW)
 confint(grvccW)
 plot(grvccW, main = "Gravina CC weighted")
+## peak to last age before 0.
+grvccW1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10, use.weights = TRUE)
+summary(grvccW1)
+confint(grvccW1)
+plot(grvccW1, main = "Gravina CC1")
+#peak plus all 
+grvccW2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12, use.weights = TRUE)
+summary(grvccW2)
+confint(grvccW2)
+plot(grvccW2, main = "Gravina CC2")
+#peak plus til last 0 age
+grvccW3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+summary(grvccW3)
+confint(grvccW3)
+plot(grvccW3, main = "Gravina CC3")
+
+grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
+grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
+grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
+grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
+
+grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
+
 ## Chapman Robson 
-grvcc <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:12)
 # for this estimator use all ages after peak catch was observed
-summary(grvcc)
-confint(grvcc)
-plot(grvcc, main = "Gravina CC")
+grvccC <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:12)
+summary(grvccC)
+confint(grvccC)
+plot(grvccC, main = "Gravina CC chapman")
+## peak to last age before 0.
+grvccC1 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:10)
+summary(grvccC1)
+confint(grvccC1)
+plot(grvccC1, main = "Gravina CC1")
+#peak plus all 
+grvccC2 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:12)
+summary(grvccC2)
+confint(grvccC2)
+plot(grvccC2, main = "Gravina CC2")
+#peak plus til last 0 age
+grvccC3 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:10)
+summary(grvccC3)
+confint(grvccC3)
+plot(grvccC3, main = "Gravina CC3")
+
+grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
+grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
+grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
+grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
+
+grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
+
+
+
+
 
 #est. meares pass data (2016 timed swims) 
 #w/2yearolds
