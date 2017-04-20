@@ -76,7 +76,7 @@ shpCR1 <- chapmanRobson(n~age, data = shpab.sumlen, ages2use = 6:13)
 Shp_cr <- cbind(Est = coef(shpCR), confint(shpCR))
 Shp_cr1 <- cbind(Est = coef(shpCR1), confint(shpCR1))
 
-shp_CR <- cbind (peak = Shp_cr[1, ], peak_plus = Shp_cr1[1, ])
+shp_CR <- cbind (peak = Shp_cr[2, ], peak_plus = Shp_cr1[2, ])
 kable(shp_CR, caption = "Chapman Robson method, peak age = 5")
 ```
 
@@ -97,11 +97,11 @@ Would you expect ages 4 and 5 to be that much greater than 6 to 13? or was there
 
 
 ### Gravina data 
-The traditional catch curve methods were performed using the Gravina data that has the ages determined from an age-length key of the Sheppard data.  These yielded a Z estimate ranging from 0.51 to 0.49.  This appears high for the life history of abalone. 
+The traditional catch curve methods were performed using the Gravina data that has the ages determined from an age-length key of the Sheppard data.  These yielded a Z estimate ranging from 0.52 to 0.44.  This appears high for the life history of abalone. 
 
 Catch curve results:
 
-```{r grv regression, include=TRUE, echo = FALSE}
+```{r grv regression, include=TRUE, echo = FALSE, warning = FALSE}
 grvab.sumlen <- read.csv("../output/grv_catchcurve.csv")
 grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
 grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10)
@@ -117,7 +117,7 @@ grv_R <- cbind (peak_all = grvr[1, ], peak_plus_all = grvr1[1, ], peak_10 = grvr
 kable(grv_R, caption = "Regression method, peak age = 2")
 ```
 
-```{r grv Wtd regression, include=TRUE, echo = FALSE}
+```{r grv Wtd regression, include=TRUE, echo = FALSE, warning = FALSE}
 grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12, use.weights = TRUE)
 grvccW1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10, use.weights = TRUE)
 grvccW2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12, use.weights = TRUE)
@@ -132,20 +132,26 @@ grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = g
 kable(grv_WR, caption = "Weighted regression method, peak age = 2")
 ```
 
-```{r grv chapman robson method, include=TRUE, echo = FALSE}
-grvccW <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12, use.weights = TRUE)
-grvccW1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10, use.weights = TRUE)
-grvccW2 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:12, use.weights = TRUE)
-grvccW3 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 3:10, use.weights = TRUE)
+```{r grv chapman robson method, include=TRUE, echo = FALSE, warning = FALSE}
+grvccC <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:12)
+grvccC1 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 2:10)
+grvccC2 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:12)
+grvccC3 <- chapmanRobson(n~age, data = grvab.sumlen, ages2use = 3:10)
 
-grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
-grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
-grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
-grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
-grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
+grvC <- cbind(Est = coef(grvccC), confint(grvccC))
+grvC1 <- cbind(Est = coef(grvccC1), confint(grvccC1))
+grvC2 <- cbind(Est = coef(grvccC2), confint(grvccC2))
+grvC3 <- cbind(Est = coef(grvccC3), confint(grvccC3))
 
-kable(grv_WR, caption = "Weighted regression method, peak age = 2")
+grv_CR <- cbind (peak_all = grvC[2, ], peak_plus_all = grvC1[2, ], peak_10 = grvC2[2, ], peak_plus_10 = grvC3[2, ])
+
+kable(grv_CR, caption = "Chapman robson method, peak age = 2")
 ```
+
+The regression method uses all ages yielded a Z estimate of about 0.48, which is shown here as an example. 
+![](../figs/regression_gravina.png)
+
+Notice that the weighted regression method here does not differ from the regression method, this is due to adequate sample sizes and therefore the regression method does not need to be weighted by sample size. 
 
 
 ## simulations to estimate Z
