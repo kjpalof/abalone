@@ -124,7 +124,7 @@ mrsab <- data.frame(len=mrsab$len, age=mrsab$age)
 mrsab <- mrsab[-c(20,21,22,23,108,126),]        #removed rows b/c each was under 10mm or had no abalone. sheppard did not produce a '0mm' category
 headtail(mrsab)
 
-mrsab %<>% mutate(lcat10=lencat(len, w=10))       # determine length categories (in this case by 10s)
+mrsab %<>% mutate(lcat10=lencat(len, w=10), lcat5 =lencat(len, w=5))       # determine length categories (in this case by 10s)
 headtail(mrsab)
 
 mrsab.unaged <- filter(mrsab, is.na(age))       # data.frame of unaged abalone
@@ -244,7 +244,7 @@ write.csv(grvab.sumlen, file = "./output/grv_catchcurve.csv")
 grvcc <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:12)
 summary(grvcc)
 confint(grvcc)
-plot(grvcc, main = "Gravina CC")
+plot(grvcc, main = "Gravina, ages 2 to 12, regression method")
 ## peak to last age before 0.
 grvcc1 <- catchCurve(n~age, data = grvab.sumlen, ages2use = 2:10)
 summary(grvcc1)
@@ -318,18 +318,46 @@ summary(grvccC3)
 confint(grvccC3)
 plot(grvccC3, main = "Gravina CC3")
 
-grvrW <- cbind(Est = coef(grvccW), confint(grvccW))
-grvrW1 <- cbind(Est = coef(grvccW1), confint(grvccW1))
-grvrW2 <- cbind(Est = coef(grvccW2), confint(grvccW2))
-grvrW3 <- cbind(Est = coef(grvccW3), confint(grvccW3))
+grvC <- cbind(Est = coef(grvccC), confint(grvccC))
+grvC1 <- cbind(Est = coef(grvccC1), confint(grvccC1))
+grvC2 <- cbind(Est = coef(grvccC2), confint(grvccC2))
+grvC3 <- cbind(Est = coef(grvccC3), confint(grvccC3))
 
-grv_WR <- cbind (peak_all = grvrW[1, ], peak_plus_all = grvrW1[1, ], peak_10 = grvrW2[1, ], peak_plus_10 = grvrW3[1, ])
-
-
-
+grv_CR <- cbind (peak_all = grvC[2, ], peak_plus_all = grvC1[2, ], peak_10 = grvC2[2, ], peak_plus_10 = grvC3[2, ])
 
 
 #est. meares pass data (2016 timed swims) 
+write.csv(mrsab.sumlen, file = "./output/mrs_catchcurve.csv")
+## simple regression
+## peak to all ages
+mrscc <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 2:9)
+summary(mrscc)
+confint(mrscc)
+plot(mrscc, main = "Meares Pass CC w/ 2 year olds")
+## peak to last age before 0.
+mrscc1 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 2:6)
+summary(mrscc1)
+confint(mrscc1)
+plot(mrscc1, main = "Meares Pass CC w/ 2 year olds")
+#peak plus all 
+mrscc2 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 3:9)
+summary(mrscc2)
+confint(mrscc2)
+plot(mrscc2, main = "Meares Pass CC w/o 2 year olds")
+#peak plus til last 0 age
+mrscc3 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 3:6)
+summary(mrscc3)
+confint(mrscc3)
+plot(mrscc3, main = "Meares Pass CC w/o 2 year olds")
+
+mrsR <- cbind(Est = coef(mrscc), confint(mrscc))
+mrsR1 <- cbind(Est = coef(mrscc1), confint(mrscc1))
+mrsR2 <- cbind(Est = coef(mrscc2), confint(mrscc2))
+mrsR3 <- cbind(Est = coef(mrscc3), confint(mrscc3))
+
+mrs_R <- cbind (peak_all = mrsR[1, ], peak_plus_all = mrsR1[1, ], peak_10 = mrsR2[1, ], peak_plus_10 = mrsR3[1, ])
+
+
 #w/2yearolds
 mrscc <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 2:9)
 summary(mrscc)
