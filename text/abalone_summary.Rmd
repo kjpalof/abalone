@@ -178,4 +178,12 @@ mrs_R <- cbind (peak_all = mrsR[1, ], peak_plus_all = mrsR1[1, ], peak_10 = mrsR
 kable(mrs_R, caption = "Regression method, peak age = 2")
 ```
 
+## Conclusions from catch curve for all areas 
+
+
 ## simulations to estimate Z
+Preliminary examinations suggest that the values of Z achieved from multiple runs of the length data through the length-age key would not produce vastly different estimate of Z.  Intial runs of 100 suggest similar estimates that all fall within the confidence intervals provided here, at least for the Gravina data.  Mearses Pass length data does not have an adequate sample size to estimate Z well.  
+
+
+
+
