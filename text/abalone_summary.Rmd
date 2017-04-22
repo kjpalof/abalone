@@ -153,5 +153,29 @@ The regression method uses all ages yielded a Z estimate of about 0.48, which is
 
 Notice that the weighted regression method here does not differ from the regression method, this is due to adequate sample sizes and therefore the regression method does not need to be weighted by sample size. 
 
+### Meares Pass data 
+The Meares Pass data is sparse compared to the other areas, only a few organisms older than 4 years old were detected and most were only 1 year old.  Even though the highest density was at 1 year of age the peak age used in the catch curve was chosen to be the second highest at an age of 3. These catch curve results are not very robust due to the smaller sample sizes and age range.  
+Additionally, the age range of the Meares Pass data (using the Sheppard age-length key) suggest it might have a different age-length relationship than Sheppard.  
+
+Only the regression method was used since the data are not producing valid ranges (see the large confidence intervals). These yielded a Z estimate ranging from 0.88 to 0.50.  
+
+Catch curve results:
+
+```{r mrs regression, include=TRUE, echo = FALSE, warning = FALSE}
+mrsab.sumlen <- read.csv("../output/mrs_catchcurve.csv")
+mrscc <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 2:9)
+mrscc1 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 2:6)
+mrscc2 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 3:9)
+mrscc3 <- catchCurve(n~age, data = mrsab.sumlen, ages2use = 3:6)
+
+mrsR <- cbind(Est = coef(mrscc), confint(mrscc))
+mrsR1 <- cbind(Est = coef(mrscc1), confint(mrscc1))
+mrsR2 <- cbind(Est = coef(mrscc2), confint(mrscc2))
+mrsR3 <- cbind(Est = coef(mrscc3), confint(mrscc3))
+
+mrs_R <- cbind (peak_all = mrsR[1, ], peak_plus_all = mrsR1[1, ], peak_10 = mrsR2[1, ], peak_plus_10 = mrsR3[1, ])
+
+kable(mrs_R, caption = "Regression method, peak age = 2")
+```
 
 ## simulations to estimate Z
