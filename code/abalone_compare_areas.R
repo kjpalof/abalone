@@ -56,6 +56,7 @@ ggplot(grvab, aes(x=len)) +
 
 #KS test between Sheppard and Gravina
 ks.test(shpab$len, grvab$len)
+ks.test(shpab$len, mrsab$len)
 
 shpab %>% bind_rows(grvab) ->allab
 allab %>% bind_rows(mrsab) -> allab2
@@ -81,3 +82,7 @@ ggplot(allab2, aes(x=len, colour = area)) +
   geom_density(alpha=.3, fill = "white")  # Overlay with transparent density plot
 
 ggplot(allab2, aes(x=len, fill= area)) + geom_density(alpha =.3)
+
+
+
+####  comparison of age - length relationship  ----------------
