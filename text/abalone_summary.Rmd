@@ -27,19 +27,19 @@ Due to the differences in both location and time, size frequency distribution co
 ![](../figs/density_abs.png)
 
 
-A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions (p-value <0.0001).  Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
+A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions (p-value <0.0001). The same test was performed between Sheppard and Meares Pass with simialr results (p-value < 0.0001). Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
 
 ## catch curve
 ### Background
 Catch curve assumptions (Smith et al. 2012): 
 
-1) age composition data is estimated without error
+1) Age composition data is estimated without error
 
-2) recruitment is constant
+2) Recruitment is constant
 
 3) Z is constant over time and across ages
 
-4) above some determined age 
+4) Above some determined age all individuals are fully selected into the fishery/ sampling methods
 
 
 Common and accepted methods to estimate Z:
