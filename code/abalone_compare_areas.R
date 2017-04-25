@@ -26,7 +26,7 @@ ggplot(shpab, aes(x=len)) +
 head(mrsab)
 
 mrsab %>% mutate(area = rep("mrs", nrow(mrsab))) -> mrsab
-
+mrsab.unaged.mod %>% mutate(area = rep("mrs", nrow(mrsab.unaged.mod))) -> mrsab.unaged.mod
                  
 #histogram of legnths (len)
 ggplot(mrsab, aes(x=len)) + 
