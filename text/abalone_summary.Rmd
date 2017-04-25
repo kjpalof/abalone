@@ -95,6 +95,7 @@ Does a peak age of 5 make sense - that this would be the age they would full rec
 
 Would you expect ages 4 and 5 to be that much greater than 6 to 13? or was there a recruitment pulse? A higher than normal recruitment pulse for ages 4 and 5 would inflat the estimate of Z, by creating an artifically high starting point for the linear catch curve analysis. 
 
+Also, the weighted regression method produces the same results as the regression method here. When this is the case it means that sample size of each age is not greatly affecting the outcome of the analysis, and therefore the sample size is adequate for this analysis.
 
 ### Gravina data 
 The traditional catch curve methods were performed using the Gravina data that has the ages determined from an age-length key of the Sheppard data.  These yielded a Z estimate ranging from 0.52 to 0.44.  This appears high for the life history of abalone. 
@@ -148,6 +149,8 @@ grv_CR <- cbind (peak_all = grvC[2, ], peak_plus_all = grvC1[2, ], peak_10 = grv
 kable(grv_CR, caption = "Chapman robson method, peak age = 2")
 ```
 
+In the above analyses peak_all uses ages 2 to 12, peak_plus_all is ages 3 to 12, peak_10 is ages 2 to 10, and peak_plus_10 is ages 3 to 10.  
+
 The regression method uses all ages yielded a Z estimate of about 0.48, which is shown here as an example. 
 ![](../figs/regression_gravina.png)
 
@@ -179,7 +182,7 @@ kable(mrs_R, caption = "Regression method, peak age = 2")
 ```
 
 ## Conclusions from catch curve for all areas 
-
+A Z estiamte of 0.50 seems unnaturally high for these populations considering their life history and lack of commercial fishing pressure.  
 
 ## simulations to estimate Z
 Preliminary examinations suggest that the values of Z achieved from multiple runs of the length data through the length-age key would not produce vastly different estimate of Z.  Intial runs of 100 suggest similar estimates that all fall within the confidence intervals provided here, at least for the Gravina data.  Mearses Pass length data does not have an adequate sample size to estimate Z well.  
