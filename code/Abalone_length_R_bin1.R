@@ -8,6 +8,7 @@ library(tidyverse)
 library(magrittr)
 library(FSA)
 library(nnet)
+library(nlstools)
 rm(list = ls()) # clear workspace since data frames have same names
 ###Age-length key from sheppard data###
 shpab_raw <- read.csv("./data/length_weight_shepard.csv", header = TRUE)  
@@ -93,7 +94,7 @@ grvab <- data.frame(len=grvab_raw$len, age=grvab_raw$age)
 grvab <- grvab[-c(192,301),]        #removed rows 192 and 301 b/c both were under 10mm. sheppard did not produce a '0mm' category
 headtail(grvab)
 
-grvab %<>% mutate(lcat5=lencat(len, w=5))       # determine length categories (in this case by 5s)
+grvab %<>% mutate(lcat5=lencat(len, w=5), lcat10 = lencat(len, w=10))       # determine length categories (in this case by 5s)
 headtail(grvab)
 
 # all these are unaged?? right?
@@ -375,4 +376,15 @@ summary(combcc)
 confint(combcc)
 plot(combcc, main = "Gravina & Meares Pass CC combined")
 
+
+# LVB models
+# data sets on their own are: shpab, grvab.unaged.mod, mrsab.unaged.mod
+shpab %>% bind_rows(grvab.unaged.mod) -> all_aged
+all_aged %>% bind_rows(mrsab.unaged.mod) -> all_aged
+# combined data is 
+
+ggplot(shpab, aes(age, len)) + geom_point() +ylab("valve length (mm)")
+
+ggplot(all_aged, aes(age, len, color = area)) +geom_point() +ylab("valve length (mm)")
+ggplot(all_aged, aes(age, len)) +geom_point() +ylab("valve length (mm)") +facet_wrap(~area)
 
