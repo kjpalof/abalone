@@ -190,5 +190,6 @@ A Z estiamte of 0.50 seems unnaturally high for these populations considering th
 Preliminary examinations suggest that the values of Z achieved from multiple runs of the length data through the length-age key would not produce vastly different estimate of Z.  Intial runs of 100 suggest similar estimates that all fall within the confidence intervals provided here, at least for the Gravina data.  Mearses Pass length data does not have an adequate sample size to estimate Z well.  
 
 
+## Growth ?? 
 
 
