@@ -2,7 +2,9 @@
 title: "Abalone analysis 2017"
 author: "Katie Palof"
 date: "April 26th, 2017"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
