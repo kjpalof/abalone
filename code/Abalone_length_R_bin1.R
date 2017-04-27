@@ -9,6 +9,7 @@ library(magrittr)
 library(FSA)
 library(nnet)
 library(nlstools)
+library(nlsMicrobio)
 rm(list = ls()) # clear workspace since data frames have same names
 ###Age-length key from sheppard data###
 shpab_raw <- read.csv("./data/length_weight_shepard.csv", header = TRUE)  
@@ -388,8 +389,8 @@ all_aged %>% mutate(AREA = ifelse(area == "shp", 1, ifelse (area == "grv", 2, if
 
 ggplot(shpab, aes(age, len)) + geom_point() +ylab("valve length (mm)")
 
-ggplot(all_aged, aes(age, len, color = area)) +geom_point() +ylab("valve length (mm)")
-ggplot(all_aged, aes(age, len)) +geom_point() +ylab("valve length (mm)") +facet_wrap(~area)
+ggplot(all_aged, aes(age, len, color = area)) +geom_point(position = "jitter") +ylab("valve length (mm)")
+ggplot(all_aged, aes(age, len)) +geom_point(position = "jitter") +ylab("valve length (mm)") +facet_wrap(~area)
 
 any(is.na(all_aged$age))
 
@@ -424,3 +425,31 @@ fitGen
 fitSep
 fit1L
 fit1K
+
+anova(fit1L, fitSep) # sig. different
+anova(fit1K, fitSep)
+anova(fitGen, fitSep)
+AIC(fitGen, fitSep, fit1L, fit1K)
+
+
+plot(len ~ jitter(age, 0.3), data = all_aged, subset = area == "shp", pch = 19, xlab = "Age (yrs)", 
+     ylab = "Valve length (mm)")
+points(len~jitter(age, 0.3), data = all_aged, subset =area == "grv", pch= 19, col = "blue")
+points(len~jitter(age, 0.3), data = all_aged, subset =area == "mrs", pch= 19, col = "red")
+curve(model1(x, Linf=coef(fitSep)[-c(2:3, 5:6)]), from =1, to = 12, lwd=2, add=TRUE)
+curve(model1(x, Linf=coef(fitSep)[-c(1, 3:4, 6)]), from =1, to = 12, lwd=2, add=TRUE, col = "blue")
+curve(model1(x, Linf=coef(fitSep)[-c(1:2, 4:5)]), from =1, to = 12, lwd=2, add=TRUE, col = "red")
+legend("topleft", legend = c("Sheppard", "Gravina", "Meares Pass"), col = c("black", "blue", "red"), 
+       lwd=2, lty=1, cex=0.75)
+
+model1  <- function(t, Linf, K = NULL) 
+{
+  if (length(Linf) == 2) {
+    K <- Linf[[2]]
+    Linf <- Linf[[1]]
+  }
+  Linf * (1 - exp(-K * (t)))
+}
+
+
+
