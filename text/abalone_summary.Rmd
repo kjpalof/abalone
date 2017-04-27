@@ -1,7 +1,7 @@
 ---
-title: "Abalone_analysis_2017"
+title: "Abalone analysis 2017"
 author: "Katie Palof"
-date: "March 22, 2017"
+date: "April 26th, 2017"
 output: html_document
 ---
 
@@ -29,7 +29,7 @@ Due to the differences in both location and time, size frequency distribution co
 
 A KS test was performed between Sheppard and Gravina which suggests that they are significantly different distributions (p-value <0.0001). The same test was performed between Sheppard and Meares Pass with simialr results (p-value < 0.0001). Age data and subsequent catch curve analysis should be interpreted with caution due to these differences. 
 
-## catch curve
+## Catch curve
 ### Background
 Catch curve assumptions (Smith et al. 2012): 
 
@@ -185,11 +185,15 @@ kable(mrs_R, caption = "Regression method, peak age = 2")
 A Z estiamte of 0.50 seems unnaturally high for these populations considering their life history and lack of commercial fishing pressure. Alternative methods for estimating natural mortality from life history information suggest a Z of around 0.25 would be more appropriate.  Additionally, a brief literature search suggested that Z ranging from 0.20 to 0.30 were found in other similar species, and while some variability would be expected in Alaskan species, a Z that is double seems extreme.
 
 
-
 ## simulations to estimate Z
 Preliminary examinations suggest that the values of Z achieved from multiple runs of the length data through the length-age key would not produce vastly different estimate of Z.  Intial runs of 100 suggest similar estimates that all fall within the confidence intervals provided here, at least for the Gravina data.  Mearses Pass length data does not have an adequate sample size to estimate Z well.  
 
 
-## Growth ?? 
+## Growth differences?  
+The length distributions of the 3 areas in this analysis suggest that the area may have different recruitment trends and may even have different growth.  As a preliminary test for differences in growth was performed by fitting a von Bertalanffy growth model to the age-length data.  Models were fit for each area seperately and a pooled estimate.  These were compared to see if they were significantly different. 
+This analysis resulted in statistically different parameters for the growth model in all three areas, however visual examination suggests that these models are still very similar.  Similar growth, using age, would be expected here since the gravina age-length key was used to establish ages for the lengths in the other two areas.  Future work should focus on establishing if these areas have similar age - growth relationships.  
+
+![](../figs/lvb_growth.png)
+
 
 
