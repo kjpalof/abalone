@@ -377,10 +377,13 @@ confint(combcc)
 plot(combcc, main = "Gravina & Meares Pass CC combined")
 
 
-# LVB models
+# LVB models - and plots -----------------------
 # data sets on their own are: shpab, grvab.unaged.mod, mrsab.unaged.mod
-shpab %>% bind_rows(grvab.unaged.mod) -> all_aged
+shpab.fnl %>% bind_rows(grvab.unaged.mod) -> all_aged
 all_aged %>% bind_rows(mrsab.unaged.mod) -> all_aged
+all_aged %>% filter(is.na (age))
+
+all_aged %>% mutate(AREA = ifelse(area == "shp", 1, ifelse (area == "grv", 2, ifelse(area =="mrs", 3, 0)) )) ->all_aged
 # combined data is 
 
 ggplot(shpab, aes(age, len)) + geom_point() +ylab("valve length (mm)")
@@ -388,3 +391,36 @@ ggplot(shpab, aes(age, len)) + geom_point() +ylab("valve length (mm)")
 ggplot(all_aged, aes(age, len, color = area)) +geom_point() +ylab("valve length (mm)")
 ggplot(all_aged, aes(age, len)) +geom_point() +ylab("valve length (mm)") +facet_wrap(~area)
 
+any(is.na(all_aged$age))
+
+# General model -all the same -------------
+(svCom <- vbStarts(len~age, data = all_aged))
+#(svGen <- lapply(svCom, rep , 3))
+svGen1 <- list(Linf=104, K=0.21)
+#svGen1a <- lapply(svGen1, rep, 3)
+
+abGen <- len ~ Linf*(1-exp(-K*(age)))
+fitGen <- nls(abGen, data = all_aged, start = svGen1)
+
+# just vary K and Linf
+svGen2 <- list(Linf = 124, K = 0.16)
+ab1L <- len ~ Linf*(1-exp(-K[AREA]*(age)))
+sv1L <- mapply(rep, svGen2, c(1, 3))
+fit1L <- nls(ab1L, data = all_aged, start = sv1L)
+
+sv3 <- list(Linf = 124, K = 0.16)
+ab1K <- len~Linf[AREA]*(1-exp(-K*age))
+sv1K <- mapply(rep, sv3, c(3,1))
+fit1K <- nls(ab1K, data = all_aged, start = sv1K)
+
+###  all seperate 
+svGen2 <- list(Linf = 127, K = 0.18)
+svGen2a <- lapply(svGen2, rep, 3)
+abSep <- len ~ Linf[AREA]*(1-exp(-K[AREA]*(age)))
+fitSep <- nls(abSep, data = all_aged, start = svGen2a)
+
+
+fitGen
+fitSep
+fit1L
+fit1K
